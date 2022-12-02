@@ -21,8 +21,14 @@ def log_order():
     """
     print('You have chosen to log a customer order.\n')
     order_size = get_order_option('size')
+    print(f'Great! The customer\'s doughnut will be {order_size.lower()}!\n')
     order_filling = get_order_option('filling')
+    print(f'The customer has chosen {order_filling}. No problem!\n')
     order_topping = get_order_option('topping')
+    print(f'{order_topping} on the top, almost there!\n')
+    print(order_size)
+    print(order_filling)
+    print(order_topping)
 
 
 def get_order_option(data):
@@ -40,6 +46,7 @@ def get_order_option(data):
     elif data == 'topping':
         available_options = SHEET.worksheet('Prices').col_values(5)
     option_num = 1
+    total_number_options = ()
     display_options = []
     # Creates a dictionary which assigns every option to a number as a value.
     # This makes selection easier for the user and allows the function to work
@@ -49,13 +56,37 @@ def get_order_option(data):
             continue
         new_option = {option_num: option}
         display_options.append(new_option)
+        total_number_options = total_number_options + tuple(str(option_num))
+        int(option_num)
         option_num += 1
     print(f'The current {data} options are:')
     for option in range(len(display_options)):
         print(f'({option + 1}) - {display_options[option][option + 1]}')
     print('')
-    customer_option = input('Please enter the customer\'s selection below:')
-    print(customer_option)
+    customer_option = validate_option(total_number_options)
+    final_selection = display_options[customer_option - 1][customer_option]
+    return final_selection
+
+
+def validate_option(data):
+    """
+    Collects option from use and checks:
+    - that it is an integer value
+    - that it is a valid option
+    returns selected option once valid.
+    """
+    while True:
+        selection = input('Please enter the customer\'s selection:\n').strip()
+        try:
+            int(selection)
+        except ValueError as error:
+            print(f'{error}, Please ensure you enter data as a number:\n')
+            continue
+        int(selection)
+        if selection in data:
+            break
+        print('Please enter a number that corresponds to the options above.\n')
+    return int(selection)
 
 
 def edit_menu():
@@ -90,7 +121,7 @@ def main():
     print('(3) - View Analytics\n')
 
     while True:  # while loop runs until a valid input is provided.
-        choice = input('Which service(1, 2, 3) would you like to access?\n')
+        choice = input('Which service would you like to access?\n').strip()
         if choice in ('1', '2', '3'):
             break
 
