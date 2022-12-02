@@ -19,6 +19,43 @@ def log_order():
     orders worksheet.
     Also calculates customer's total price.
     """
+    print('You have chosen to log a customer order.\n')
+    order_size = get_order_option('size')
+    order_filling = get_order_option('filling')
+    order_topping = get_order_option('topping')
+
+
+def get_order_option(data):
+    """
+    Collects all available options from spreadsheet
+    and collates them into a dictionary alongside
+    numerical keys to make selection easier for the user.
+    Returns user inputted order option.
+    """
+    # Collects available options from relevant column in prices worksheet.
+    if data == 'size':
+        available_options = SHEET.worksheet('Prices').col_values(1)
+    elif data == 'filling':
+        available_options = SHEET.worksheet('Prices').col_values(3)
+    elif data == 'topping':
+        available_options = SHEET.worksheet('Prices').col_values(5)
+    option_num = 1
+    display_options = []
+    # Creates a dictionary which assigns every option to a number as a value.
+    # This makes selection easier for the user and allows the function to work
+    # correctly even when the menu is adjusted.
+    for option in available_options:
+        if option == data:
+            continue
+        new_option = {option_num: option}
+        display_options.append(new_option)
+        option_num += 1
+    print(f'The current {data} options are:')
+    for option in range(len(display_options)):
+        print(f'({option + 1}) - {display_options[option][option + 1]}')
+    print('')
+    customer_option = input('Please enter the customer\'s selection below:')
+    print(customer_option)
 
 
 def edit_menu():
@@ -42,7 +79,7 @@ def main():
     Welcomes the user and explains functionality of
     the choices provided. The user can choose one of three
     options:
-        1. Log a current customer's order and calculcate their total price.
+        1. Log a current customer's order and calculate their total price.
         2. Edit the menu (Add/Remove options, Change prices).
         3. View some analytics about recent orders.
     """
@@ -56,9 +93,9 @@ def main():
         choice = input('Which service(1, 2, 3) would you like to access?\n')
         if choice in ('1', '2', '3'):
             break
-        else:
-            print('Sorry, that is an invalid option!')
-            print('Please enter either \'1\' or \'2\' or \'3\'.\n')
+
+        print('Sorry, that is an invalid option!')
+        print('Please enter either \'1\' or \'2\' or \'3\'.\n')
 
     if choice == '1':
         log_order()
