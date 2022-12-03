@@ -23,12 +23,15 @@ def log_order():
     order_size = get_order_option('size')
     print(f'Great! The customer\'s doughnut will be {order_size.lower()}!\n')
     order_filling = get_order_option('filling')
-    print(f'The customer has chosen {order_filling}. No problem!\n')
+    print(f'The customer has chosen {order_filling.lower()}. No problem!\n')
     order_topping = get_order_option('topping')
     print(f'{order_topping} on the top, almost there!\n')
+    order_quantity = get_order_quantity()
+    print(f'Perfect, the customer would like {order_quantity} doughnut/s!\n')
     print(order_size)
     print(order_filling)
     print(order_topping)
+    print(order_quantity)
 
 
 def get_order_option(data):
@@ -66,6 +69,18 @@ def get_order_option(data):
     customer_option = validate_option(total_number_options)
     final_selection = display_options[customer_option - 1][customer_option]
     return final_selection
+
+
+def get_order_quantity():
+    """
+    Collects number of doughnuts desired by customer.
+    Has a range of 1 - 8.
+    """
+    print('Finally, how many of these doughnuts would the customer like?')
+    print('Please enter a number between (1) and the maximum quantity (8): \n')
+    possible_quantity_values = ('1', '2', '3', '4', '5', '6', '7', '8')
+    quantity = validate_option(possible_quantity_values)
+    return quantity
 
 
 def validate_option(data):
