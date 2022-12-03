@@ -35,6 +35,8 @@ def log_order():
     order_details = [order_size, order_filling, order_topping, order_num]
     total_price = calculate_total_price(order_details)
     print(f'The customer\'s total price is: £{total_price:.2f}.\n')
+    order_details.append(total_price)
+    update_orders_worksheet(order_details)
 
 
 def get_order_option(data):
@@ -152,6 +154,16 @@ def calculate_total_price(order_details):
     total_price /= 100
     print('All done!')
     return total_price
+
+
+def update_orders_worksheet(order):
+    """
+    Adds final order details to the orders worksheet.
+    """
+    print('Updating orders worksheet...\n')
+    orders_sheet = SHEET.worksheet('Orders')
+    orders_sheet.append_row(order)
+    print('Updating finished.\n')
 
 
 def edit_menu():
