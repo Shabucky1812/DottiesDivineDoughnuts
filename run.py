@@ -20,18 +20,18 @@ def log_order():
     Also calculates customer's total price.
     """
     print('You have chosen to log a customer order.\n')
-    order_size = get_order_option('size')
-    print(f'Great! The customer\'s doughnut will be {order_size.lower()}!\n')
-    order_filling = get_order_option('filling')
-    print(f'The customer has chosen {order_filling.lower()}. No problem!\n')
-    order_topping = get_order_option('topping')
-    print(f'{order_topping} on the top, almost there!\n')
-    order_quantity = get_order_quantity()
-    print(f'Perfect, the customer would like {order_quantity} doughnut/s!\n')
-    print(order_size)
-    print(order_filling)
-    print(order_topping)
-    print(order_quantity)
+    while True:
+        order_size = get_order_option('size')
+        print(f'Great! The customer\'s doughnut will be {order_size}!\n')
+        order_filling = get_order_option('filling')
+        print(f'The customer has chosen {order_filling}. No problem!\n')
+        order_topping = get_order_option('topping')
+        print(f'{order_topping} on the top, almost there!\n')
+        order_num = get_order_quantity()
+        print(f'Perfect, the customer wants {order_num} doughnut/s!\n')
+        if confirm_order(order_size, order_filling, order_topping, order_num):
+            break
+        print('Okay, let\'s start again!\n')
 
 
 def get_order_option(data):
@@ -102,6 +102,29 @@ def validate_option(data):
             break
         print('Please enter a number that corresponds to the options above.\n')
     return int(selection)
+
+
+def confirm_order(size, filling, topping, quantity):
+    """
+    Prints the complete customer order and requests confirmation.
+    If correct, returns true and breaks the order loop.
+    If incorrect, returns false and start the loop again.
+    """
+    print('Okay, here are the customer\'s complete order details:\n')
+    print(f'Doughnut size: {size}')
+    print(f'Doughnut filling: {filling}')
+    print(f'Doughnut topping: {topping}')
+    print(f'Number of Doughnuts: {quantity}\n')
+    print('If this is correct: Enter (1)')
+    print('If this is incorrect, and you would like to retry: Enter (2)\n')
+    while True:
+        complete = input('Please choose below:\n')
+        if complete == '1' or complete == '2':
+            break
+        print('That is an invalid option! Please choose either (1) or (2).')
+    if complete == '1':
+        return True
+    return False
 
 
 def edit_menu():
