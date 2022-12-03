@@ -32,6 +32,9 @@ def log_order():
         if confirm_order(order_size, order_filling, order_topping, order_num):
             break
         print('Okay, let\'s start again!\n')
+    order_details = [order_size, order_filling, order_topping, order_num]
+    total_price = calculate_total_price(order_details)
+    print(f'The customer\'s total price is: £{total_price:.2f}.\n')
 
 
 def get_order_option(data):
@@ -118,13 +121,37 @@ def confirm_order(size, filling, topping, quantity):
     print('If this is correct: Enter (1)')
     print('If this is incorrect, and you would like to retry: Enter (2)\n')
     while True:
-        complete = input('Please choose below:\n')
+        complete = input('Please choose below:\n').strip()
         if complete == '1' or complete == '2':
             break
         print('That is an invalid option! Please choose either (1) or (2).')
     if complete == '1':
         return True
     return False
+
+
+def calculate_total_price(order_details):
+    """
+    Uses the confirmed order details to calculate
+    the total order price.
+    Returns total price.
+    """
+    print('Calculating order price...\n')
+    menu = SHEET.worksheet('Prices')
+    total_price = 0.00
+    for i in range(3):
+        # Finds the cell which contains the selected menu item.
+        item = menu.find(order_details[i])
+        # Finds the item price by adding one to the item's col value.
+        price = menu.cell(item.row, item.col + 1)
+        item_price = float(price.value)
+        # Adds each item's price to the total price.
+        total_price += (item_price * 100)
+    # Multiplies the total_price by the quantity of doughnuts.
+    total_price *= order_details[3]
+    total_price /= 100
+    print('All done!')
+    return total_price
 
 
 def edit_menu():
