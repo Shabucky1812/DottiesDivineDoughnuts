@@ -1,3 +1,4 @@
+import sys
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -15,9 +16,9 @@ SHEET = GSPREAD_CLIENT.open('dotties_divine_doughnuts')
 
 def log_order():
     """
-    Allows user to input customer's order and adds it to
+    Allows user to input customer's order, uses it to calculate
+    total price, and finally adds all of the order data to the
     orders worksheet.
-    Also calculates customer's total price.
     """
     print('You have chosen to log a customer order.\n')
     while True:
@@ -37,6 +38,7 @@ def log_order():
     print(f'The customer\'s total price is: £{total_price:.2f}.\n')
     order_details.append(total_price)
     update_orders_worksheet(order_details)
+    service_finished('logging a customer\'s order')
 
 
 def get_order_option(data):
@@ -182,6 +184,30 @@ def view_analytics():
     """
 
 
+def service_finished(service_string):
+    """
+    This function is called when the user finishes using a service.
+    It allows them to return to the menu to complete a new task or
+    exit the application.
+    """
+    print(f'Great! You have now finished {service_string}!\n')
+    print('What would you like to do next:')
+    print('(1) - Return to main menu.')
+    print('(2) - Exit the program.\n')
+    while True:
+        choice = input('Please enter your choice below:\n').strip()
+        if choice in ('1', '2'):
+            break
+        print('Sorry, that is an invalid option!')
+        print('Please enter either (1) or (2).\n')
+    if choice == '1':
+        print('Okay, returning to main menu!\n')
+        main()
+    elif choice == '2':
+        print('See you later! Exiting application...\n')
+        sys.exit(0)
+
+
 def main():
     """
     Welcomes the user and explains functionality of
@@ -191,7 +217,6 @@ def main():
         2. Edit the menu (Add/Remove options, Change prices).
         3. View some analytics about recent orders.
     """
-    print('Welcome to \'Dottie\'s Divine Doughnuts\' services application!\n')
     print('Here are the services currently provided:')
     print('(1) - Log Current Customer Order')
     print('(2) - Edit Menu')
@@ -201,9 +226,8 @@ def main():
         choice = input('Which service would you like to access?\n').strip()
         if choice in ('1', '2', '3'):
             break
-
         print('Sorry, that is an invalid option!')
-        print('Please enter either \'1\' or \'2\' or \'3\'.\n')
+        print('Please enter either (1) or (2) or (3).\n')
 
     if choice == '1':
         log_order()
@@ -213,4 +237,5 @@ def main():
         view_analytics()
 
 
+print('Welcome to \'Dottie\'s Divine Doughnuts\' services application!\n')
 main()
