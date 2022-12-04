@@ -212,6 +212,26 @@ def add_menu_item():
     display_columns(correct_columns)
 
 
+def get_category_columns(category):
+    """
+    Uses the selected menu category to collect relevant menu
+    columns from the prices worksheet and returns them.
+    """
+    if category == '1':
+        menu_options = SHEET.worksheet('Prices').col_values(1)
+        menu_prices = SHEET.worksheet('Prices').col_values(2)
+    elif category == '2':
+        menu_options = SHEET.worksheet('Prices').col_values(3)
+        menu_prices = SHEET.worksheet('Prices').col_values(4)
+    elif category == '3':
+        menu_options = SHEET.worksheet('Prices').col_values(5)
+        menu_prices = SHEET.worksheet('Prices').col_values(6)
+    del menu_options[0]
+    del menu_prices[0]
+    columns = [menu_options, menu_prices]
+    return columns
+
+
 def view_analytics():
     """
     Calculates a number of helpful analytics from recent orders
