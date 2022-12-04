@@ -208,8 +208,8 @@ def add_menu_item():
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
-    correct_columns = get_category_columns(category_to_append)
-    display_columns(correct_columns)
+    correct_columns_data = get_category_columns(category_to_append)
+    display_columns(correct_columns_data)
 
 
 def get_category_columns(category):
@@ -220,16 +220,32 @@ def get_category_columns(category):
     if category == '1':
         menu_options = SHEET.worksheet('Prices').col_values(1)
         menu_prices = SHEET.worksheet('Prices').col_values(2)
+        menu_category = 'size'
     elif category == '2':
         menu_options = SHEET.worksheet('Prices').col_values(3)
         menu_prices = SHEET.worksheet('Prices').col_values(4)
+        menu_category = 'filling'
     elif category == '3':
         menu_options = SHEET.worksheet('Prices').col_values(5)
         menu_prices = SHEET.worksheet('Prices').col_values(6)
+        menu_category = 'topping'
     del menu_options[0]
     del menu_prices[0]
-    columns = [menu_options, menu_prices]
-    return columns
+    columns_data = [menu_options, menu_prices, menu_category]
+    return columns_data
+
+
+def display_columns(columns_data):
+    """
+    Uses the columns list of lists to create a dictionary
+    of options and prices which is then printed in a readable
+    format.
+    """
+    column_1 = columns_data[0]
+    column_2 = columns_data[1]
+    print(f'The current {columns_data[2]} options are:')
+    for i in range(len(column_1)):
+        print(f'{column_1[i]}: £{column_2[i]:.2f}')
 
 
 def view_analytics():
