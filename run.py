@@ -22,11 +22,11 @@ def log_order():
     """
     print('You have chosen to log a customer order.\n')
     while True:
-        order_size = get_order_option('size')
+        order_size = get_order_option('size', 1)
         print(f'Great! The customer\'s doughnut will be {order_size}!\n')
-        order_filling = get_order_option('filling')
+        order_filling = get_order_option('filling', 3)
         print(f'The customer has chosen {order_filling}. No problem!\n')
-        order_topping = get_order_option('topping')
+        order_topping = get_order_option('topping', 5)
         print(f'{order_topping} on the top, almost there!\n')
         order_num = get_order_quantity()
         print(f'Perfect, the customer wants {order_num} doughnut/s!\n')
@@ -41,7 +41,7 @@ def log_order():
     service_finished('logging a customer\'s order')
 
 
-def get_order_option(data):
+def get_order_option(data, column):
     """
     Collects all available options from spreadsheet
     and collates them into a dictionary alongside
@@ -49,12 +49,7 @@ def get_order_option(data):
     Returns user inputted order option.
     """
     # Collects available options from relevant column in prices worksheet.
-    if data == 'size':
-        available_options = SHEET.worksheet('Prices').col_values(1)
-    elif data == 'filling':
-        available_options = SHEET.worksheet('Prices').col_values(3)
-    elif data == 'topping':
-        available_options = SHEET.worksheet('Prices').col_values(5)
+    available_options = SHEET.worksheet('Prices').col_values(column)
     option_num = 1
     total_number_options = ()
     display_options = []
@@ -175,6 +170,24 @@ def edit_menu():
         2. User can remove options from the menu.
         3. User can edit option prices on the menu.
     """
+    print('You have chosen to edit the menu.\n')
+    print('Here are the ways you can edit the menu:')
+    print('(1) - Add an item to the menu')
+    print('(2) - Remove an item from the menu')
+    print('(3) - Edit the price of an existing item\n')
+    while True:  # while loop runs until a valid input is provided.
+        choice = input('What change would you like to make?\n').strip()
+        if choice in ('1', '2', '3'):
+            break
+        print('Sorry, that is an invalid option!')
+        print('Please enter either (1) or (2) or (3).\n')
+
+    if choice == '1':
+        add_menu_item()
+    elif choice == '2':
+        remove_menu_item()
+    elif choice == '3':
+        edit_item_price()
 
 
 def view_analytics():
