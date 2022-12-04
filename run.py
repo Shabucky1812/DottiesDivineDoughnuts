@@ -68,7 +68,7 @@ def get_order_option(data, column):
     for option in range(len(display_options)):
         print(f'({option + 1}) - {display_options[option][option + 1]}')
     print('')
-    customer_option = validate_option(total_number_options)
+    customer_option = validate_order_option(total_number_options)
     final_selection = display_options[customer_option - 1][customer_option]
     return final_selection
 
@@ -81,11 +81,11 @@ def get_order_quantity():
     print('Finally, how many of these doughnuts would the customer like?')
     print('Please enter a number between (1) and the maximum quantity (8): \n')
     possible_quantity_values = ('1', '2', '3', '4', '5', '6', '7', '8')
-    quantity = validate_option(possible_quantity_values)
+    quantity = validate_order_option(possible_quantity_values)
     return quantity
 
 
-def validate_option(data):
+def validate_order_option(data):
     """
     Collects option from use and checks:
     - that it is an integer value
@@ -188,6 +188,28 @@ def edit_menu():
         remove_menu_item()
     elif choice == '3':
         edit_item_price()
+
+
+def add_menu_item():
+    """
+    Asks the user which menu option they would like to add to.
+    Receives a desired addition and it's corresponding price,
+    validates the values and appends to relevant columns on
+    the prices worksheet.
+    """
+    print('Firstly, which order option would you like to add an item to?\n')
+    print('The current options are:')
+    print('(1) - Doughnut sizes')
+    print('(2) - Doughnut fillings')
+    print('(3) - Doughnut toppings\n')
+    while True:
+        category_to_append = input('Which option would you like to add to?\n')
+        if category_to_append in ('1', '2', '3'):
+            break
+        print('Sorry, that is an invalid option!')
+        print('Please enter either (1) or (2) or (3).\n')
+    correct_columns = get_category_columns(category_to_append)
+    display_columns(correct_columns)
 
 
 def view_analytics():
