@@ -25,7 +25,8 @@ def log_order():
         order_size = get_order_option('size', 1)
         print(f'Great! The customer\'s doughnut will be {order_size}!\n')
         order_filling = get_order_option('filling', 3)
-        print(f'The customer has chosen {order_filling}. No problem!\n')
+        print(f'The customer has chosen {order_filling} filling. No problem!')
+        print('')
         order_topping = get_order_option('topping', 5)
         print(f'{order_topping} on the top, almost there!\n')
         order_num = get_order_quantity()
@@ -97,7 +98,7 @@ def validate_order_option(data):
         try:
             int(selection)
         except ValueError as error:
-            print(f'{error}, Please ensure you enter data as a number:\n')
+            print(f'{error}, Please ensure you enter your data as a number.\n')
             continue
         int(selection)
         if selection in data:
@@ -210,6 +211,7 @@ def add_menu_item():
         print('Please enter either (1) or (2) or (3).\n')
     correct_columns_data = get_category_columns(category_to_append)
     display_columns(correct_columns_data)
+    data_to_append = get_new_items(correct_columns_data)
 
 
 def get_category_columns(category):
@@ -237,15 +239,44 @@ def get_category_columns(category):
 
 def display_columns(columns_data):
     """
-    Uses the columns list of lists to create a dictionary
-    of options and prices which is then printed in a readable
-    format.
+    Uses the columns list of lists to print out the
+    relevant menu options in a readable format.
     """
     column_1 = columns_data[0]
     column_2 = columns_data[1]
     print(f'The current {columns_data[2]} options are:')
     for i in range(len(column_1)):
-        print(f'{column_1[i]}: £{column_2[i]:.2f}')
+        print(f'{column_1[i]}: £{float(column_2[i]):.2f}')
+    print('')
+
+
+def get_new_items(data):
+    """
+    Receives new item information from the user
+    and calls for it to be validated.
+    Returns the validated data.
+    """
+    print(f'Next, enter the name of the {data[2]} you would like to add.')
+    print('IMPORTANT: Your data must be spelt correctly, contain only')
+    print('alphabetical characters and have no spaces.')
+    while True:
+        new_menu_item = input('Please enter your data here:\n').strip()
+        if not new_menu_item.isalpha():
+            print('Your data must contain only letters and no spaces.\n')
+            continue
+        break
+    print(f'\nFinally, how much would you like your new {data[2]} to cost?')
+    print('IMPORTANT: Your data must contain only numbers and be valued in')
+    print('pence. Example: £0.30 would be inputted as 30.')
+    while True:
+        new_item_price = input('Please enter your price here:\n').strip()
+        try:
+            int(new_item_price)
+        except ValueError as error:
+            print(f'{error}, Please ensure you enter your data as a number.')
+            continue
+        break
+    print(f'{new_menu_item}: £{float(new_item_price)/100}')
 
 
 def view_analytics():
