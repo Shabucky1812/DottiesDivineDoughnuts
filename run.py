@@ -97,8 +97,8 @@ def validate_order_option(data):
         selection = input('Please enter the customer\'s selection:\n').strip()
         try:
             int(selection)
-        except ValueError as error:
-            print(f'{error}, Please ensure you enter your data as a number.\n')
+        except ValueError as e:
+            print(f'{e}, Please ensure you enter your data as a number.\n')
             continue
         int(selection)
         if selection in data:
@@ -212,6 +212,7 @@ def add_menu_item():
     correct_columns_data = get_category_columns(category_to_append)
     display_columns(correct_columns_data)
     data_to_append = get_new_items(correct_columns_data)
+    print(data_to_append)
 
 
 def get_category_columns(category):
@@ -256,27 +257,49 @@ def get_new_items(data):
     and calls for it to be validated.
     Returns the validated data.
     """
-    print(f'Next, enter the name of the {data[2]} you would like to add.')
-    print('IMPORTANT: Your data must be spelt correctly, contain only')
-    print('alphabetical characters and have no spaces.')
     while True:
-        new_menu_item = input('Please enter your data here:\n').strip()
-        if not new_menu_item.isalpha():
-            print('Your data must contain only letters and no spaces.\n')
-            continue
-        break
-    print(f'\nFinally, how much would you like your new {data[2]} to cost?')
-    print('IMPORTANT: Your data must contain only numbers and be valued in')
-    print('pence. Example: £0.30 would be inputted as 30.')
+        print(f'Next, enter the name of the {data[2]} you would like to add.')
+        print('IMPORTANT: Your data must be spelt correctly, contain only')
+        print('alphabetical characters and have no spaces.')
+        while True:
+            new_menu_item = input('Please enter your data here:\n').strip()
+            if not new_menu_item.isalpha():
+                print('Your data must contain only letters and no spaces.\n')
+                continue
+            break
+        print(f'\nLastly, how much would you like your new {data[2]} to cost?')
+        print('IMPORTANT: Your data must contain only numbers and be valued')
+        print('in pence. Example: £0.30 would be inputted as 30.')
+        while True:
+            new_item_price = input('Please enter your price here:\n').strip()
+            try:
+                int(new_item_price)
+            except ValueError as e:
+                print(f'{e}, Please ensure you enter your data as a number.')
+                continue
+            break
+        if confirm_items(new_menu_item, new_item_price):
+            break
+        print('\nOkay, let\'s start again!')
+    return [new_menu_item, float(new_item_price)/100]
+
+
+def confirm_items(item, price):
+    """
+    Confirms the submitted item data to be appended to menu.
+    Returns True if correct.
+    Returns False if incorrect.
+    """
+    print('\nAlright, here is your new menu option and price:')
+    print(f'{item.capitalize()}: £{float(price)/100:.2f}\n')
     while True:
-        new_item_price = input('Please enter your price here:\n').strip()
-        try:
-            int(new_item_price)
-        except ValueError as error:
-            print(f'{error}, Please ensure you enter your data as a number.')
-            continue
-        break
-    print(f'{new_menu_item}: £{float(new_item_price)/100}')
+        confirm = input('If this is correct enter (1), to re-enter (2):\n')
+        if confirm == '1' or confirm == '2':
+            break
+        print('That is an invalid option! Please choose either (1) or (2).')
+    if confirm == '1':
+        return True
+    return False
 
 
 def view_analytics():
