@@ -213,6 +213,7 @@ def add_menu_item():
     display_columns(correct_columns_data)
     data_to_append = get_new_items(correct_columns_data)
     append_to_menu(data_to_append)
+    service_finished('creating a new menu option')
 
 
 def get_category_columns(category):
