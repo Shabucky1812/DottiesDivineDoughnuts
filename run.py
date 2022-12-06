@@ -212,7 +212,7 @@ def add_menu_item():
     correct_columns_data = get_category_columns(category_to_append)
     display_columns(correct_columns_data)
     data_to_append = get_new_items(correct_columns_data)
-    print(data_to_append)
+    append_to_menu(data_to_append)
 
 
 def get_category_columns(category):
@@ -224,17 +224,20 @@ def get_category_columns(category):
         menu_options = SHEET.worksheet('Prices').col_values(1)
         menu_prices = SHEET.worksheet('Prices').col_values(2)
         menu_category = 'size'
+        cols_to_update = [1, 2]
     elif category == '2':
         menu_options = SHEET.worksheet('Prices').col_values(3)
         menu_prices = SHEET.worksheet('Prices').col_values(4)
         menu_category = 'filling'
+        cols_to_update = [3, 4]
     elif category == '3':
         menu_options = SHEET.worksheet('Prices').col_values(5)
         menu_prices = SHEET.worksheet('Prices').col_values(6)
         menu_category = 'topping'
+        cols_to_update = [5, 6]
     del menu_options[0]
     del menu_prices[0]
-    columns_data = [menu_options, menu_prices, menu_category]
+    columns_data = [menu_options, menu_prices, menu_category, cols_to_update]
     return columns_data
 
 
@@ -281,7 +284,7 @@ def get_new_items(data):
         if confirm_items(new_menu_item, new_item_price):
             break
         print('\nOkay, let\'s start again!')
-    return [new_menu_item, float(new_item_price)/100]
+    return [new_menu_item, float(new_item_price)/100, data[3]]
 
 
 def confirm_items(item, price):
@@ -300,6 +303,20 @@ def confirm_items(item, price):
     if confirm == '1':
         return True
     return False
+
+
+def append_to_menu(data):
+    """
+    Adds new item information to the relevant columns
+    on the prices worksheet.
+    """
+    print('Okay, adding your new menu item now...\n')
+    menu = SHEET.worksheet('Prices')
+    item_column = SHEET.worksheet('Prices').col_values(data[2][0])
+    row_to_update = len(item_column) + 1
+    menu.update_cell(row_to_update, data[2][0], data[0].capitalize())
+    menu.update_cell(row_to_update, data[2][1], data[1])
+    print('Finished! Menu updated!\n')
 
 
 def view_analytics():
