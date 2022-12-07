@@ -217,7 +217,7 @@ def get_menu_category():
     print('(2) - Doughnut fillings')
     print('(3) - Doughnut toppings\n')
     while True:
-        category = get_user_input('Which option would you like to add to?')
+        category = get_user_input('Which category would you like to select?')
         if category in {'1', '2', '3'}:
             break
         print('Sorry, that is an invalid option!')
@@ -343,6 +343,31 @@ def remove_menu_item():
     # new = menu.cell(last_item_row, 3)
     # menu.update_cell(cell.row, cell.col, new.value)
     # menu.update_cell(last_item_row, cell.col, '')
+    print('Okay, which menu category would you like to remove an item from?\n')
+    category = get_menu_category()
+    correct_columns_data = get_category_columns(category)
+    display_columns(correct_columns_data)
+    item_to_remove = get_item_to_remove(correct_columns_data)
+
+
+def get_item_to_remove(data):
+    """
+    Receives the item the user would like to remove.
+    Ensures the item exists by checking it against the available options.
+    Returns the validated item.
+    """
+    while True:
+        print(f'Next, enter the {data[2]} option you would like to remove.')
+        print('IMPORTANT: Your data must be spelt correctly and exist')
+        print('in the options listed above.\n')
+        item_to_remove = get_user_input('Enter the item here:\n')
+        if not item_to_remove.isalpha():
+            print('Please make sure your data contains only letters.')
+            continue
+        if item_to_remove.capitalize() in data[0]:
+            break
+        print('Please ensure your data matches one of the options above.')
+    return item_to_remove
 
 
 def view_analytics():
