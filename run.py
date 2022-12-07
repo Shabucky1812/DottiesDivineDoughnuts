@@ -343,6 +343,7 @@ def remove_menu_item():
     print('Deleting menu item now...\n')
     delete_item(item_to_remove)
     print('Menu item deleted successfully!')
+    service_finished('removing a menu item')
 
 
 def get_item_to_remove(data):
