@@ -320,6 +320,14 @@ def append_to_menu(data):
     print('Finished! Menu updated!\n')
 
 
+def remove_menu_item():
+    """
+    Asks the user what item they would like to remove from menu.
+    Validates input, locates item on worksheet with corresponding
+    price and removes the item and price from the menu.
+    """
+
+
 def view_analytics():
     """
     Calculates a number of helpful analytics from recent orders
