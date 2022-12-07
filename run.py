@@ -199,6 +199,19 @@ def add_menu_item():
     the prices worksheet.
     """
     print('Firstly, which order option would you like to add an item to?\n')
+    category = get_menu_category()
+    correct_columns_data = get_category_columns(category)
+    display_columns(correct_columns_data)
+    data_to_append = get_new_items(correct_columns_data)
+    append_to_menu(data_to_append)
+    service_finished('creating a new menu option')
+
+
+def get_menu_category():
+    """
+    Receives the menu category to edit from the user.
+    Returns the chosen category.
+    """
     print('The current options are:')
     print('(1) - Doughnut sizes')
     print('(2) - Doughnut fillings')
@@ -209,11 +222,7 @@ def add_menu_item():
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
-    correct_columns_data = get_category_columns(category)
-    display_columns(correct_columns_data)
-    data_to_append = get_new_items(correct_columns_data)
-    append_to_menu(data_to_append)
-    service_finished('creating a new menu option')
+    return category
 
 
 def get_category_columns(category):
@@ -326,6 +335,14 @@ def remove_menu_item():
     Validates input, locates item on worksheet with corresponding
     price and removes the item and price from the menu.
     """
+    # menu = SHEET.worksheet('Prices')
+    # item_to_delete = input('del')
+    # cell = menu.find(item_to_delete)
+    # column = menu.col_values(3)
+    # last_item_row = len(column)
+    # new = menu.cell(last_item_row, 3)
+    # menu.update_cell(cell.row, cell.col, new.value)
+    # menu.update_cell(last_item_row, cell.col, '')
 
 
 def view_analytics():
