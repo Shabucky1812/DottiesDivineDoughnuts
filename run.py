@@ -88,13 +88,13 @@ def get_order_quantity():
 
 def validate_order_option(data):
     """
-    Collects option from use and checks:
+    Collects option from user and checks:
     - that it is an integer value
     - that it is a valid option
     returns selected option once valid.
     """
     while True:
-        selection = input('Please enter the customer\'s selection:\n').strip()
+        selection = get_user_input('Please enter the customer\'s selection:')
         try:
             int(selection)
         except ValueError as e:
@@ -121,7 +121,7 @@ def confirm_order(size, filling, topping, quantity):
     print('If this is correct: Enter (1)')
     print('If this is incorrect, and you would like to retry: Enter (2)\n')
     while True:
-        complete = input('Please choose below:\n').strip()
+        complete = get_user_input('Please choose below:')
         if complete == '1' or complete == '2':
             break
         print('That is an invalid option! Please choose either (1) or (2).')
@@ -177,7 +177,7 @@ def edit_menu():
     print('(2) - Remove an item from the menu')
     print('(3) - Edit the price of an existing item\n')
     while True:  # while loop runs until a valid input is provided.
-        choice = input('What change would you like to make?\n').strip()
+        choice = get_user_input('What change would you like to make?')
         if choice in ('1', '2', '3'):
             break
         print('Sorry, that is an invalid option!')
@@ -204,12 +204,12 @@ def add_menu_item():
     print('(2) - Doughnut fillings')
     print('(3) - Doughnut toppings\n')
     while True:
-        category_to_append = input('Which option would you like to add to?\n')
-        if category_to_append in ('1', '2', '3'):
+        category = get_user_input('Which option would you like to add to?')
+        if category in ('1', '2', '3'):
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
-    correct_columns_data = get_category_columns(category_to_append)
+    correct_columns_data = get_category_columns(category)
     display_columns(correct_columns_data)
     data_to_append = get_new_items(correct_columns_data)
     append_to_menu(data_to_append)
@@ -266,7 +266,7 @@ def get_new_items(data):
         print('IMPORTANT: Your data must be spelt correctly, contain only')
         print('alphabetical characters and have no spaces.')
         while True:
-            new_menu_item = input('Please enter your data here:\n').strip()
+            new_menu_item = get_user_input('Please enter your data here:')
             if not new_menu_item.isalpha():
                 print('Your data must contain only letters and no spaces.\n')
                 continue
@@ -275,7 +275,7 @@ def get_new_items(data):
         print('IMPORTANT: Your data must contain only numbers and be valued')
         print('in pence. Example: £0.30 would be inputted as 30.')
         while True:
-            new_item_price = input('Please enter your price here:\n').strip()
+            new_item_price = get_user_input('Please enter your price here:')
             try:
                 int(new_item_price)
             except ValueError as e:
@@ -297,7 +297,7 @@ def confirm_items(item, price):
     print('\nAlright, here is your new menu option and price:')
     print(f'{item.capitalize()}: £{float(price)/100:.2f}\n')
     while True:
-        confirm = input('If this is correct enter (1), to re-enter (2):\n')
+        confirm = get_user_input('Enter (1) if correct, otherwise enter (2):')
         if confirm == '1' or confirm == '2':
             break
         print('That is an invalid option! Please choose either (1) or (2).')
@@ -338,7 +338,7 @@ def service_finished(service_string):
     print('(1) - Return to main menu.')
     print('(2) - Exit the program.\n')
     while True:
-        choice = input('Please enter your choice below:\n').strip()
+        choice = get_user_input('Please enter your choice below:')
         if choice in ('1', '2'):
             break
         print('Sorry, that is an invalid option!')
@@ -349,6 +349,25 @@ def service_finished(service_string):
     elif choice == '2':
         print('See you later! Exiting application...\n')
         sys.exit(0)
+
+
+def get_user_input(message):
+    """
+    This function is called every time a user input is required,
+    it standardizes the UX by keeping consistent design features
+    all in one place.
+    Also checks if the user input is either 'exit' or 'main'
+    and responds accordingly.
+    Returns user input.
+    """
+    user_input = input(f'{message}\n').strip().lower()
+    if user_input == 'exit':
+        print('See you later! Exiting application...\n')
+        sys.exit(0)
+    if user_input == 'main':
+        print('Okay, returning to main menu!\n')
+        main()
+    return user_input
 
 
 def main():
@@ -366,7 +385,7 @@ def main():
     print('(3) - View Analytics\n')
 
     while True:  # while loop runs until a valid input is provided.
-        choice = input('Which service would you like to access?\n').strip()
+        choice = get_user_input('Which service would you like to access?')
         if choice in ('1', '2', '3'):
             break
         print('Sorry, that is an invalid option!')
@@ -380,5 +399,8 @@ def main():
         view_analytics()
 
 
-print('Welcome to \'Dottie\'s Divine Doughnuts\' services application!\n')
-main()
+if __name__ == "__main__":
+    print('Welcome to \'Dottie\'s Divine Doughnuts\' services application!\n')
+    print('Enter \'exit\' to exit the program at any time.')
+    print('Enter \'main\' to return to the main menu at any time.\n')
+    main()
