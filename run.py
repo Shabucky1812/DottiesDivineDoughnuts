@@ -81,7 +81,7 @@ def get_order_quantity():
     """
     print('Finally, how many of these doughnuts would the customer like?')
     print('Please enter a number between (1) and the maximum quantity (8): \n')
-    possible_quantity_values = ('1', '2', '3', '4', '5', '6', '7', '8')
+    possible_quantity_values = {'1', '2', '3', '4', '5', '6', '7', '8'}
     quantity = validate_order_option(possible_quantity_values)
     return quantity
 
@@ -122,7 +122,7 @@ def confirm_order(size, filling, topping, quantity):
     print('If this is incorrect, and you would like to retry: Enter (2)\n')
     while True:
         complete = get_user_input('Please choose below:')
-        if complete == '1' or complete == '2':
+        if complete in {'1', '2'}:
             break
         print('That is an invalid option! Please choose either (1) or (2).')
     if complete == '1':
@@ -178,7 +178,7 @@ def edit_menu():
     print('(3) - Edit the price of an existing item\n')
     while True:  # while loop runs until a valid input is provided.
         choice = get_user_input('What change would you like to make?')
-        if choice in ('1', '2', '3'):
+        if choice in {'1', '2', '3'}:
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
@@ -205,7 +205,7 @@ def add_menu_item():
     print('(3) - Doughnut toppings\n')
     while True:
         category = get_user_input('Which option would you like to add to?')
-        if category in ('1', '2', '3'):
+        if category in {'1', '2', '3'}:
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
@@ -298,7 +298,7 @@ def confirm_items(item, price):
     print(f'{item.capitalize()}: £{float(price)/100:.2f}\n')
     while True:
         confirm = get_user_input('Enter (1) if correct, otherwise enter (2):')
-        if confirm == '1' or confirm == '2':
+        if confirm in {'1', '2'}:
             break
         print('That is an invalid option! Please choose either (1) or (2).')
     if confirm == '1':
@@ -339,7 +339,7 @@ def service_finished(service_string):
     print('(2) - Exit the program.\n')
     while True:
         choice = get_user_input('Please enter your choice below:')
-        if choice in ('1', '2'):
+        if choice in {'1', '2'}:
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2).\n')
@@ -386,7 +386,7 @@ def main():
 
     while True:  # while loop runs until a valid input is provided.
         choice = get_user_input('Which service would you like to access?')
-        if choice in ('1', '2', '3'):
+        if choice in {'1', '2', '3'}:
             break
         print('Sorry, that is an invalid option!')
         print('Please enter either (1) or (2) or (3).\n')
