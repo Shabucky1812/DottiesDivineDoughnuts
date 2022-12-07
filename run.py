@@ -291,13 +291,13 @@ def get_new_items(data):
                 print(f'{e}, Please ensure you enter your data as a number.')
                 continue
             break
-        if confirm_items(new_menu_item, new_item_price):
+        if confirm_item_to_add(new_menu_item, new_item_price):
             break
         print('\nOkay, let\'s start again!')
     return [new_menu_item, float(new_item_price)/100, data[3]]
 
 
-def confirm_items(item, price):
+def confirm_item_to_add(item, price):
     """
     Confirms the submitted item data to be appended to menu.
     Returns True if correct.
@@ -355,21 +355,42 @@ def get_item_to_remove(data):
         print(f'Next, enter the {data[2]} option you would like to remove.')
         print('IMPORTANT: Your data must be spelt correctly and exist')
         print('in the options listed above.\n')
-        item_to_remove = get_user_input('Enter the item here:\n')
-        if not item_to_remove.isalpha():
-            print('Please make sure your data contains only letters.')
-            continue
-        if item_to_remove.capitalize() in data[0]:
+        while True:
+            item_to_remove = get_user_input('Enter the item here:\n')
+            if not item_to_remove.isalpha():
+                print('Please make sure your data contains only letters.')
+                continue
+            if item_to_remove.capitalize() in data[0]:
+                break
+            print('Please ensure your data matches one of the options above.')
+        if confirm_item_to_remove(item_to_remove):
             break
-        print('Please ensure your data matches one of the options above.')
+        print('Let\'s start again!\n')
     return item_to_remove
+
+
+def confirm_item_to_remove(item):
+    """
+    Confirms the submitted item data to be appended to menu.
+    Returns True if correct.
+    Returns False if incorrect.
+    """
+    print(f'Alright, {item.capitalize()} will be deleted from the menu.')
+    while True:
+        confirm = get_user_input('Enter (1) if correct, otherwise enter (2):')
+        if confirm in {'1', '2'}:
+            break
+        print('That is an invalid option! Please choose either (1) or (2).')
+    if confirm == '1':
+        return True
+    return False
 
 
 def delete_item(item):
     """
     Uses passed in item to locate cells to be deleted.
     To avoid leaving gaps in the worksheet columns,
-    swaps the values of the cells to be deleted with 
+    swaps the values of the cells to be deleted with
     the last cells of the columns before deleting.
     """
     menu = SHEET.worksheet('Prices')
