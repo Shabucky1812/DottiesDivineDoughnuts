@@ -335,19 +335,14 @@ def remove_menu_item():
     Validates input, locates item on worksheet with corresponding
     price and removes the item and price from the menu.
     """
-    # menu = SHEET.worksheet('Prices')
-    # item_to_delete = input('del')
-    # cell = menu.find(item_to_delete)
-    # column = menu.col_values(3)
-    # last_item_row = len(column)
-    # new = menu.cell(last_item_row, 3)
-    # menu.update_cell(cell.row, cell.col, new.value)
-    # menu.update_cell(last_item_row, cell.col, '')
     print('Okay, which menu category would you like to remove an item from?\n')
     category = get_menu_category()
     correct_columns_data = get_category_columns(category)
     display_columns(correct_columns_data)
     item_to_remove = get_item_to_remove(correct_columns_data)
+    print('Deleting menu item now...\n')
+    delete_item(item_to_remove)
+    print('Menu item deleted successfully!')
 
 
 def get_item_to_remove(data):
@@ -368,6 +363,25 @@ def get_item_to_remove(data):
             break
         print('Please ensure your data matches one of the options above.')
     return item_to_remove
+
+
+def delete_item(item):
+    """
+    Uses passed in item to locate cells to be deleted.
+    To avoid leaving gaps in the worksheet columns,
+    swaps the values of the cells to be deleted with 
+    the last cells of the columns before deleting.
+    """
+    menu = SHEET.worksheet('Prices')
+    item_cell = menu.find(item.capitalize())
+    item_column = menu.col_values(item_cell.col)
+    last_item_row = len(item_column)
+    last_item_cell = menu.cell(last_item_row, item_cell.col)
+    last_price_cell = menu.cell(last_item_row, item_cell.col + 1)
+    menu.update_cell(item_cell.row, item_cell.col, last_item_cell.value)
+    menu.update_cell(item_cell.row, item_cell.col + 1, last_price_cell.value)
+    menu.update_cell(last_item_cell.row, last_item_cell.col, '')
+    menu.update_cell(last_price_cell.row, last_price_cell.col, '')
 
 
 def view_analytics():
