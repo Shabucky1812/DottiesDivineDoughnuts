@@ -490,17 +490,21 @@ def view_analytics():
     """
     print('You have chosen to view some recent order analytics.\n')
     get_category_modes()
+    print('In the last 5 orders, you have made a total of:')
+    doughnut_quantity = get_doughnuts_made()
+    print(f'{doughnut_quantity} Doughnuts!\n')
+    input('Press ENTER to continue')
 
 
 def get_category_modes():
     """
     Uses orders worksheet to find the mode of each item category.
     """
-    menu = SHEET.worksheet('Orders')
+    orders = SHEET.worksheet('Orders')
     category_columns = ['size', 'filling', 'topping']
     index = 1
     for category in category_columns:
-        column = menu.col_values(index)
+        column = orders.col_values(index)
         index += 1
         modes = multimode(column[-5:])
         print(f'Here is/are the current most popular doughnut {category}/s:')
@@ -512,11 +516,29 @@ def print_mode(category, modes):
     Prints mode analytics to user.
     """
     if len(modes) > 2:
-        print(f'No {category} is more popular than any other!')
+        print(f'No {category} are more popular than any other!')
     else:
         for mode in modes:
             print(mode)
     input('\nPress ENTER to continue\n')
+
+
+def get_doughnuts_made():
+    """
+    Uses orders worksheet to calculate the total
+    amount of doughnuts made in the last 5 orders.
+    Returns this value.
+    """
+    orders = SHEET.worksheet('Orders')
+    # get quantity values from relevant column.
+    quantity_column = orders.col_values(4)
+    # separate the last 5
+    last_5 = quantity_column[-5:]
+    # convert string nums into ints.
+    int_quantities = [int(num) for num in last_5]
+    # add all values.
+    total = sum(int_quantities)
+    return total
 
 
 def service_finished(service_string):
