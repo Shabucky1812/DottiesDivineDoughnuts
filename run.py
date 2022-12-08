@@ -339,44 +339,44 @@ def remove_menu_item():
     category = get_menu_category()
     correct_columns_data = get_category_columns(category)
     display_columns(correct_columns_data)
-    item_to_remove = get_item_to_remove(correct_columns_data)
+    item_to_remove = get_item_to_change(correct_columns_data, 'remove')
     print('Deleting menu item now...\n')
     delete_item(item_to_remove)
     print('Menu item deleted successfully!')
     service_finished('removing a menu item')
 
 
-def get_item_to_remove(data):
+def get_item_to_change(data, change):
     """
-    Receives the item the user would like to remove.
+    Receives the item the user would like to remove/edit.
     Ensures the item exists by checking it against the available options.
     Returns the validated item.
     """
     while True:
-        print(f'Next, enter the {data[2]} option you would like to remove.')
+        print(f'Next, enter the {data[2]} option you would like to {change}.')
         print('IMPORTANT: Your data must be spelt correctly and exist')
         print('in the options listed above.\n')
         while True:
-            item_to_remove = get_user_input('Enter the item here:\n')
-            if not item_to_remove.isalpha():
+            item_to_change = get_user_input('Enter the item here:\n')
+            if not item_to_change.isalpha():
                 print('Please make sure your data contains only letters.')
                 continue
-            if item_to_remove.capitalize() in data[0]:
+            if item_to_change.capitalize() in data[0]:
                 break
             print('Please ensure your data matches one of the options above.')
-        if confirm_item_to_remove(item_to_remove):
+        if confirm_item_to_change(item_to_change, change):
             break
         print('Let\'s start again!\n')
-    return item_to_remove
+    return item_to_change
 
 
-def confirm_item_to_remove(item):
+def confirm_item_to_change(item, change):
     """
-    Confirms the submitted item data to be appended to menu.
+    Confirms the submitted item data to be edited/removed the menu.
     Returns True if correct.
     Returns False if incorrect.
     """
-    print(f'Alright, {item.capitalize()} will be deleted from the menu.')
+    print(f'Is {item.capitalize()} the item you would like to {change}?')
     while True:
         confirm = get_user_input('Enter (1) if correct, otherwise enter (2):')
         if confirm in {'1', '2'}:
@@ -410,6 +410,19 @@ def delete_item(item):
     # deletes the now repeat cells at the bottom of the columns
     menu.update_cell(last_item_cell.row, last_item_cell.col, '')
     menu.update_cell(last_price_cell.row, last_price_cell.col, '')
+
+
+def edit_item_price():
+    """
+    Asks user for item to be edited and requests new price.
+    Locates item on prices worksheet and edits the price.
+    """
+    print('Firstly, which category is the item you would like to edit in?\n')
+    category = get_menu_category()
+    correct_columns_data = get_category_columns(category)
+    display_columns(correct_columns_data)
+    item_to_edit = get_item_to_change(correct_columns_data, 'edit')
+    print(item_to_edit)
 
 
 def view_analytics():
