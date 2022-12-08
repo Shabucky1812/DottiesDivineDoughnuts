@@ -395,13 +395,19 @@ def delete_item(item):
     the last cells of the columns before deleting.
     """
     menu = SHEET.worksheet('Prices')
+    # locates the cell to be deleted.
     item_cell = menu.find(item.capitalize())
+    # uses cell data to collect all column values.
     item_column = menu.col_values(item_cell.col)
+    # finds the last item in the column using len()
     last_item_row = len(item_column)
+    # stores last cell data for both columns to be edited.
     last_item_cell = menu.cell(last_item_row, item_cell.col)
     last_price_cell = menu.cell(last_item_row, item_cell.col + 1)
+    # replaces cells to be deleted with values of bottom cells.
     menu.update_cell(item_cell.row, item_cell.col, last_item_cell.value)
     menu.update_cell(item_cell.row, item_cell.col + 1, last_price_cell.value)
+    # deletes the now repeat cells at the bottom of the columns
     menu.update_cell(last_item_cell.row, last_item_cell.col, '')
     menu.update_cell(last_price_cell.row, last_price_cell.col, '')
 
