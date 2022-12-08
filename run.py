@@ -422,7 +422,52 @@ def edit_item_price():
     correct_columns_data = get_category_columns(category)
     display_columns(correct_columns_data)
     item_to_edit = get_item_to_change(correct_columns_data, 'edit')
-    print(item_to_edit)
+    new_price = get_new_price(item_to_edit)
+    print(new_price)
+
+
+def get_new_price(item):
+    """
+    Uses selected item to find current price and print both to user.
+    Asks the user what tehy would like the new price to be and returns it.
+    """
+    menu = SHEET.worksheet('Prices')
+    menu_item = menu.find(item.capitalize())
+    price = menu.cell(menu_item.row, menu_item.col + 1)
+    print(f'{menu_item.value} currently costs £{float(price.value):.2f}.\n')
+    while True:
+        print(f'What would you like the new cost of {item} to be?')
+        print('IMPORTANT: Your data must contain only numbers and be valued')
+        print('in pence. Example: £0.30 would be inputted as 30.')
+        while True:
+            new_price = get_user_input('Enter the new price here:')
+            try:
+                int(new_price)
+            except ValueError as e:
+                print(f'{e}, Please ensure you enter your data as a number.')
+                continue
+            break
+        if confirm_item_price(item, float(new_price)):
+            break
+        print('Please try again.')
+    return float(new_price)/100
+
+
+def confirm_item_price(item, price):
+    """
+    Confirms the new item price.
+    Returns True if correct.
+    Returns False if incorrect.
+    """
+    print(f'Okay, would you like {item} to cost £{price/100:.2f}?\n')
+    while True:
+        confirm = get_user_input('Enter (1) if correct, otherwise enter (2):')
+        if confirm in {'1', '2'}:
+            break
+        print('That is an invalid option! Please choose either (1) or (2).')
+    if confirm == '1':
+        return True
+    return False
 
 
 def view_analytics():
