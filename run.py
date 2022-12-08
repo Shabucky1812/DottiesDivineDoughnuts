@@ -1,4 +1,5 @@
 import sys
+from statistics import multimode
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -487,6 +488,35 @@ def view_analytics():
     Calculates a number of helpful analytics from recent orders
     and displays them to the user.
     """
+    print('You have chosen to view some recent order analytics.\n')
+    get_category_modes()
+
+
+def get_category_modes():
+    """
+    Uses orders worksheet to find the mode of each item category.
+    """
+    menu = SHEET.worksheet('Orders')
+    category_columns = ['size', 'filling', 'topping']
+    index = 1
+    for category in category_columns:
+        column = menu.col_values(index)
+        index += 1
+        modes = multimode(column[-5:])
+        print(f'Here is/are the current most popular doughnut {category}/s:')
+        print_mode(category, modes)
+
+
+def print_mode(category, modes):
+    """
+    Prints mode analytics to user.
+    """
+    if len(modes) > 2:
+        print(f'No {category} is more popular than any other!')
+    else:
+        for mode in modes:
+            print(mode)
+    input('\nPress ENTER to continue\n')
 
 
 def service_finished(service_string):
