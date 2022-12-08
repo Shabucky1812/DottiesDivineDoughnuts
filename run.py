@@ -423,7 +423,10 @@ def edit_item_price():
     display_columns(correct_columns_data)
     item_to_edit = get_item_to_change(correct_columns_data, 'edit')
     new_price = get_new_price(item_to_edit)
-    print(new_price)
+    print('Updating menu now...\n')
+    update_price_on_menu(item_to_edit, new_price)
+    print('Updating complete!\n')
+    service_finished('editing an item\'s price')
 
 
 def get_new_price(item):
@@ -438,7 +441,7 @@ def get_new_price(item):
     while True:
         print(f'What would you like the new cost of {item} to be?')
         print('IMPORTANT: Your data must contain only numbers and be valued')
-        print('in pence. Example: £0.30 would be inputted as 30.')
+        print('in pence. Example: £0.30 would be inputted as 30.\n')
         while True:
             new_price = get_user_input('Enter the new price here:')
             try:
@@ -468,6 +471,15 @@ def confirm_item_price(item, price):
     if confirm == '1':
         return True
     return False
+
+
+def update_price_on_menu(item, price):
+    """
+    Uses submitted item and price to update prices worksheet.
+    """
+    menu = SHEET.worksheet('Prices')
+    item_cell = menu.find(item.capitalize())
+    menu.update_cell(item_cell.row, item_cell.col + 1, price)
 
 
 def view_analytics():
