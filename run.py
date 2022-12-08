@@ -493,7 +493,11 @@ def view_analytics():
     print('In the last 5 orders, you have made a total of:')
     doughnut_quantity = get_doughnuts_made()
     print(f'{doughnut_quantity} Doughnuts!\n')
-    input('Press ENTER to continue')
+    input('Press ENTER to continue\n')
+    print('Since starting this business, you have made a total income of:')
+    income = get_income()
+    print(f'£{income:.2f}\n')
+    service_finished('viewing recent order analytics')
 
 
 def get_category_modes():
@@ -538,6 +542,24 @@ def get_doughnuts_made():
     int_quantities = [int(num) for num in last_5]
     # add all values.
     total = sum(int_quantities)
+    return total
+
+
+def get_income():
+    """
+    Uses orders worksheet to calculate total income in
+    the last 5 orders.
+    Returns this value.
+    """
+    orders = SHEET.worksheet('Orders')
+    price_total_column = orders.col_values(5)
+    # delete header from list.
+    del price_total_column[0]
+    # convert values to floats
+    # the values are multiplied by 100 before addition
+    # to prevent any calculation errors from adding floats.
+    float_prices = [float(price) * 100 for price in price_total_column]
+    total = sum(float_prices) / 100
     return total
 
 
