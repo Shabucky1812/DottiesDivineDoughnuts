@@ -48,7 +48,13 @@ def get_order_option(data, column):
     Collects all available options from spreadsheet
     and collates them into a dictionary alongside
     numerical keys to make selection easier for the user.
-    Returns user inputted order option.
+
+    Args:
+        data: string: Target column header.
+        column: int: relevant column index on prices worksheet.
+
+    Returns:
+        final_selection: string: Users option choice.
     """
     # Collects available options from relevant column in prices worksheet.
     available_options = SHEET.worksheet('Prices').col_values(column)
@@ -79,6 +85,9 @@ def get_order_quantity():
     """
     Collects number of doughnuts desired by customer.
     Has a range of 1 - 8.
+
+    Returns:
+        quantity: int: number of doughnuts between 1-8.
     """
     print('Finally, how many of these doughnuts would the customer like?')
     print('Please enter a number between (1) and the maximum quantity (8): \n')
@@ -92,7 +101,12 @@ def validate_order_option(data):
     Collects option from user and checks:
     - that it is an integer value
     - that it is a valid option
-    returns selected option once valid.
+
+    Args:
+        data: string: User inputted data.
+
+    Returns:
+        selection: int: number that represents user's selection.
     """
     while True:
         selection = get_user_input('Please enter the customer\'s selection:')
@@ -111,8 +125,16 @@ def validate_order_option(data):
 def confirm_order(size, filling, topping, quantity):
     """
     Prints the complete customer order and requests confirmation.
-    If correct, returns true and breaks the order loop.
-    If incorrect, returns false and start the loop again.
+
+    Args:
+        size: string: customer requested doughnut size.
+        filling: string: customer requested doughnut filling.
+        topping: string: customer requested doughnut topping.
+        quantity: int: customer requested doughnut quantity.
+
+    Returns:
+        True: boolean: If user confirms options.
+        False: boolean: If user wants to restart.
     """
     print('Okay, here are the customer\'s complete order details:\n')
     print(f'Doughnut size: {size}')
@@ -135,7 +157,12 @@ def calculate_total_price(order_details):
     """
     Uses the confirmed order details to calculate
     the total order price.
-    Returns total price.
+
+    Args:
+        order_details: list of [str, str, str, int]: contains order details.
+
+    Returns:
+        total_price: float: order price.
     """
     print('Calculating order price...\n')
     menu = SHEET.worksheet('Prices')
@@ -158,6 +185,9 @@ def calculate_total_price(order_details):
 def update_orders_worksheet(order):
     """
     Adds final order details to the orders worksheet.
+
+    Args:
+        order: list of [str, str, str, int, float]: order details.
     """
     print('Updating orders worksheet...\n')
     orders_sheet = SHEET.worksheet('Orders')
@@ -211,7 +241,9 @@ def add_menu_item():
 def get_menu_category():
     """
     Receives the menu category to edit from the user.
-    Returns the chosen category.
+
+    Returns:
+        category: string: contains user's selected menu category
     """
     print('The current options are:')
     print('(1) - Doughnut sizes')
@@ -230,6 +262,13 @@ def get_category_columns(category):
     """
     Uses the selected menu category to collect relevant menu
     columns from the prices worksheet and returns them.
+
+    Args:
+        category: string: contains user's selected menu category
+
+    Returns:
+        columns_data: list of [list of str, list of str, str, list of int]
+                      contains data regarding relevant worksheet columns.
     """
     if category == '1':
         menu_options = SHEET.worksheet('Prices').col_values(1)
@@ -256,6 +295,10 @@ def display_columns(columns_data):
     """
     Uses the columns list of lists to print out the
     relevant menu options in a readable format.
+
+    Args:
+        columns_data: list of [list of str, list of str, str, list of int]
+                      contains data regarding relevant worksheet columns.
     """
     column_1 = columns_data[0]
     column_2 = columns_data[1]
@@ -270,6 +313,15 @@ def get_new_items(data):
     Receives new item information from the user
     and calls for it to be validated.
     Returns the validated data.
+
+    Args:
+        data: list of [list of str, list of str, str, list of int]
+              contains data regarding relevant worksheet columns.
+
+    Returns:
+        new_menu_item: string: user's desired new menu option.
+        new_item_price: float: price of new menu option.
+        data[3]: list of int: relevant column index numbers.
     """
     while True:
         print(f'Next, enter the name of the {data[2]} you would like to add.')
@@ -301,8 +353,14 @@ def get_new_items(data):
 def confirm_item_to_add(item, price):
     """
     Confirms the submitted item data to be appended to menu.
-    Returns True if correct.
-    Returns False if incorrect.
+
+    Args:
+        item: string: New menu item.
+        price: string: Price of new item.
+
+    Returns:
+        True: boolean: if addition confirmed.
+        False: boolean: if addition denied.
     """
     print('\nAlright, here is your new menu option and price:')
     print(f'{item.capitalize()}: £{float(price)/100:.2f}\n')
@@ -320,6 +378,9 @@ def append_to_menu(data):
     """
     Adds new item information to the relevant columns
     on the prices worksheet.
+
+    Args:
+        data: list of [str, float, list of int]: contains data to add to menu.
     """
     print('Okay, adding your new menu item now...\n')
     menu = SHEET.worksheet('Prices')
@@ -351,7 +412,14 @@ def get_item_to_change(data, change):
     """
     Receives the item the user would like to remove/edit.
     Ensures the item exists by checking it against the available options.
-    Returns the validated item.
+
+    Args:
+        data: list of [list of str, list of str, str, list of int]
+              contains data regarding relevant worksheet columns.
+        change: string: contains relevant change to make. (remove/edit)
+
+    Returns:
+        item_to_change: string: contains menu option to change.
     """
     while True:
         print(f'Next, enter the {data[2]} option you would like to {change}.')
@@ -374,8 +442,14 @@ def get_item_to_change(data, change):
 def confirm_item_to_change(item, change):
     """
     Confirms the submitted item data to be edited/removed the menu.
-    Returns True if correct.
-    Returns False if incorrect.
+
+    Args:
+        item: string: item to be changed.
+        change: string: type of change to make to item.
+
+    Returns:
+        True: boolean: if change confirmed.
+        False: boolean: if change denied.
     """
     print(f'Is {item.capitalize()} the item you would like to {change}?')
     while True:
@@ -394,6 +468,9 @@ def delete_item(item):
     To avoid leaving gaps in the worksheet columns,
     swaps the values of the cells to be deleted with
     the last cells of the columns before deleting.
+
+    Args:
+        item: string: Item user would like to delete from menu.
     """
     menu = SHEET.worksheet('Prices')
     # locates the cell to be deleted.
@@ -434,6 +511,12 @@ def get_new_price(item):
     """
     Uses selected item to find current price and print both to user.
     Asks the user what tehy would like the new price to be and returns it.
+
+    Args:
+        item: string: item user would like to edit price of.
+
+    Returns:
+        new_price: float: new item price.
     """
     menu = SHEET.worksheet('Prices')
     menu_item = menu.find(item.capitalize())
@@ -460,8 +543,14 @@ def get_new_price(item):
 def confirm_item_price(item, price):
     """
     Confirms the new item price.
-    Returns True if correct.
-    Returns False if incorrect.
+
+    Args:
+        item: string: item to be edited.
+        price: float: new item price.
+
+    Returns:
+        True: boolean: if change confirmed.
+        False: boolean: if change denied.
     """
     print(f'Okay, would you like {item} to cost £{price/100:.2f}?\n')
     while True:
@@ -477,6 +566,10 @@ def confirm_item_price(item, price):
 def update_price_on_menu(item, price):
     """
     Uses submitted item and price to update prices worksheet.
+
+    Args:
+        item: string: item to be edited.
+        price: float: new item price.
     """
     menu = SHEET.worksheet('Prices')
     item_cell = menu.find(item.capitalize())
@@ -518,6 +611,10 @@ def get_category_modes():
 def print_mode(category, modes):
     """
     Prints mode analytics to user.
+
+    Args:
+        category: string: relevant menu option category.
+        modes: list of str: most common menu options.
     """
     if len(modes) > 2:
         print(f'No {category} are more popular than any other!')
@@ -531,7 +628,9 @@ def get_doughnuts_made():
     """
     Uses orders worksheet to calculate the total
     amount of doughnuts made in the last 5 orders.
-    Returns this value.
+
+    Returns:
+        total: int: number of doughnuts made in last 5 orders.
     """
     orders = SHEET.worksheet('Orders')
     # get quantity values from relevant column.
@@ -547,9 +646,10 @@ def get_doughnuts_made():
 
 def get_income():
     """
-    Uses orders worksheet to calculate total income in
-    the last 5 orders.
-    Returns this value.
+    Uses orders worksheet to calculate total income since business inception.
+
+    Returns:
+        total: float: total income made.
     """
     orders = SHEET.worksheet('Orders')
     price_total_column = orders.col_values(5)
@@ -568,6 +668,9 @@ def service_finished(service_string):
     This function is called when the user finishes using a service.
     It allows them to return to the menu to complete a new task or
     exit the application.
+
+    Args:
+        service_string: string: contains relevant service finish info.
     """
     print(f'Great! You have now finished {service_string}!\n')
     print('What would you like to do next:')
@@ -594,7 +697,12 @@ def get_user_input(message):
     all in one place.
     Also checks if the user input is either 'exit' or 'main'
     and responds accordingly.
-    Returns user input.
+
+    Args:
+        message: string: input message.
+
+    Returns:
+        user_input: string: user input.
     """
     user_input = input(f'{message}\n').strip().lower()
     if user_input == 'exit':
