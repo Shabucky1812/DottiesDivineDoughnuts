@@ -1,6 +1,6 @@
-import sys
-from statistics import multimode
-import gspread
+import sys  # to terminate application when requested.
+from statistics import multimode  # to calculate most popular customer options.
+import gspread  # to read from and write to google spreadsheet.
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -27,7 +27,7 @@ def log_order():
         print(f'Great! The customer\'s doughnut will be {order_size}!\n')
         order_filling = get_order_option('filling', 3)
         print(f'The customer has chosen {order_filling} filling. No problem!')
-        print('')
+        print('')  # too many characters on above line for a '\n'.
         order_topping = get_order_option('topping', 5)
         print(f'{order_topping} on the top, almost there!\n')
         order_num = get_order_quantity()
@@ -65,7 +65,7 @@ def get_order_option(data, column):
     # This makes selection easier for the user and allows the function to work
     # correctly even when the menu is adjusted.
     for option in available_options:
-        if option == data:
+        if option == data:  # skips past column header.
             continue
         new_option = {option_num: option}
         display_options.append(new_option)
@@ -285,6 +285,7 @@ def get_category_columns(category):
         menu_prices = SHEET.worksheet('Prices').col_values(6)
         menu_category = 'topping'
         cols_to_update = [5, 6]
+    # removes column headers.
     del menu_options[0]
     del menu_prices[0]
     columns_data = [menu_options, menu_prices, menu_category, cols_to_update]
@@ -384,8 +385,11 @@ def append_to_menu(data):
     """
     print('Okay, adding your new menu item now...\n')
     menu = SHEET.worksheet('Prices')
+    # uses data to find relevant column values.
     item_column = SHEET.worksheet('Prices').col_values(data[2][0])
+    # uses len() to find next empty cell to add to.
     row_to_update = len(item_column) + 1
+    # updates item column and uses row data to update adjacent price column.
     menu.update_cell(row_to_update, data[2][0], data[0].capitalize())
     menu.update_cell(row_to_update, data[2][1], data[1])
     print('Finished! Menu updated!\n')
@@ -595,7 +599,8 @@ def view_analytics():
 
 def get_category_modes():
     """
-    Uses orders worksheet to find the mode of each item category.
+    Uses orders worksheet to find the mode of
+    each item category for the last 5 orders.
     """
     orders = SHEET.worksheet('Orders')
     category_columns = ['size', 'filling', 'topping']
