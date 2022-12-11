@@ -330,6 +330,9 @@ def get_new_items(data):
         print('alphabetical characters and have no spaces.')
         while True:
             new_menu_item = get_user_input('Please enter your data here:')
+            if not check_item_exists(new_menu_item, data[3]):
+                print('Your data already exists! Please try again.\n')
+                continue
             if not new_menu_item.isalpha():
                 print('Your data must contain only letters and no spaces.\n')
                 continue
@@ -349,6 +352,25 @@ def get_new_items(data):
             break
         print('\nOkay, let\'s start again!')
     return [new_menu_item, float(new_item_price)/100, data[3]]
+
+
+def check_item_exists(item, columns):
+    """
+    Checks new item doesn't already exist.
+
+    Args:
+        item: string: new item.
+        columns: list of int: relevant worksheet columns.
+
+    Returns:
+        True: boolean: if item is new.
+        False: boolean: if item already exists.
+    """
+    menu = SHEET.worksheet('Prices')
+    relevant_column = menu.col_values(columns[0])
+    if item.capitalize() in relevant_column:
+        return False
+    return True
 
 
 def confirm_item_to_add(item, price):
