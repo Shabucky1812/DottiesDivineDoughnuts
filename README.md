@@ -28,6 +28,13 @@ Above is the Flowchart for this application, created using [Lucidchart](https://
 
 As this application features no front-end design, I decided to not create a visual wireframe. I instead created a flowchart which details the potential pathways a user of this application may follow and explains the steps the code will have to take for the application to function as intended.
 ## Features
+### Welcome Message:  
+![Welcome message of Dottie's Divine Doughnuts application.](/assets/images/ddd-welcome.png)  
+After initially loading the application, the user is greeted with the above welcome message. The welcome message introduces the user to the application, communicates important information, and prompts the user to choose from a selection of services. This welcome is valuable to the user because it introduces the consistent and user-friendly style of the application, and lets the user know important information regarding exiting the application and returning to this very selection menu.
+
+### Logging a customer order:
+![First logging order screen](/assets/images/ddd-log1.png)  
+This is the next message that will be presented to the user should they select option 1 - 'Log Current Customer Order' from the main menu. The program re-iterates the user's choice to them to confirm the service they are now using and then presents the first category options to select from. It is worth noting now that every user input is validated before being used further in the code. For the exact snippet of code above, If the user attempts to submit a non-integer value they will be presented with a quick message to remind them that their input should be an integer and if their input is an integer but does not correlate to one of the options to choose from then they will be shown a different message prompting them to choose from the selection above. After both of these cases, the user is allowed to try again. This style of validation is present for every user input required throughout the application but I won't continue to detail them like this to avoid repeating myself.
 
 ## Technologies Used
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
