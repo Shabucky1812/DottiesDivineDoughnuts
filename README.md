@@ -55,11 +55,23 @@ This time, after successfully selecting a topping, the user is presented with a 
 ![Fifth logging order screen](/assets/images/ddd-log5.png)  
 Finally, after selecting an acceptable quantity, the program presents the user with the complete order details. If the user is unhappy with these details for any reason (they may have made a mistake/customer changes mind last minute) then they have the option to retry which will take them back to the start of the order logging process. If they are happy with these details then they enter '1' and continue with the process.  
 
-![Sixth loggin order screen](/assets/images/ddd-log6.png)  
+![Sixth logging order screen](/assets/images/ddd-log6.png)  
 Once the user has confirmed their order details, they will be presented with the above screen. Firstly, the program tells the user it is calculating the total order price, before presenting the calculated price back to the user. It is important that the program communicates this process because it involves reading from the external spreadsheet and mathematical calculations which are both actions that can take time for python to achieve. This can create a small delay which would be frustrating for the user if they did not understand why it was occuring, the small message lets the user know that a small delay is expected and that nothing is wrong if one occurs. After printing the total price, the program then tells the user that is updating (and eventually has updated) the orders worksheet before finishing the service and asking what the user would like to do next. The user may either return to the main menu or exit the application. Below you can see that the order has been fully appended to the orders worksheet.  
+
 ![Updated orders worksheet](/assets/images/ddd-orders-update.png)  
 
 The logging an order service is valuable to the user because it allows them to easily track a customer's order and have the price calculated and orders worksheet updated automatically. The UI throughout this service is consistent and simple to use which reduces user error and elicits a positive response upon use.  
+
+### Editing the menu:
+![Process selection for editing the menu](/assets/images/ddd-edit-menu.png)  
+
+If the user instead selects option 2 - 'Edit menu' from the main menu then they will be presented with the above screen. The application now provides the user with additional options regarding the edit they would like to make. This is valuable to the user as it seperates their tasks into smaller, more manageable processes and provides clarification about the task they are currently working on.  
+
+![Category selection screen](/assets/images/ddd-edit-menu2.png)  
+
+Whatever selection the user makes, the user is first prompted to select which order option the item they would like to add to/remove from/edit an item from. This is important as it ensures the menu remains structured correctly after changes are made  
+
+#### Adding an item:
 
 ## Technologies Used
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
