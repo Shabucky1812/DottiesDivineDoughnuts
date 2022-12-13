@@ -69,9 +69,29 @@ If the user instead selects option 2 - 'Edit menu' from the main menu then they 
 
 ![Category selection screen](/assets/images/ddd-edit-menu2.png)  
 
-Whatever selection the user makes, the user is first prompted to select which order option the item they would like to add to/remove from/edit an item from. This is important as it ensures the menu remains structured correctly after changes are made  
+Whatever selection the user makes, the user is first prompted to select which order option the item they would like to add to/remove from/edit an item from. This is important as it ensures the menu remains structured correctly after changes are made.  
 
 #### Adding an item:
+![First adding item screen](/assets/images/ddd-add-item1.png)  
+
+In this example the user has chosen to add an item to the sizes category. The program responds by printing all of the current menu options for the relevant category, alongside the matching prices, and it then request the user's new item. This input is validated to ensure it consists of only alphabetical characters and, importantly, that the new item does not already exist. This is necessary because duplicate options would create a number of bugs when running the other application services.  
+
+![Second adding item screen](/assets/images/ddd-add-item2.png)  
+
+Once they have inputted a new item, the user will be prompted to input the item's price. The program receives this input in pence to remove the potential user error surrounding inputting a value with a '.' followed by 2 decimal places. This is intended to make validation of this value easier and to prevent having to translate specific formatting rules to the user. To fully ensure this input is simple for the user, the application provides an example input.  
+
+![Third adding item screen](/assets/images/ddd-add-item3.png)  
+
+Next, the program prints the new menu data to the user and requests confirmation that everything is correct. This is valuable because it prevents frustration should the user have made a mistake entering any information. If the user enters '2' then they are taken back to enter the new item data again.  
+
+![Final adding item screen](/assets/images/ddd-add-item4.png)  
+
+Once the user is happy with their new data and has confirmed this with the application, the program will update the menu and explain this to the user before presenting the same service finished text as before. Below you can see how the menu has been updated with our new size!  
+
+![Updated menu with new addition](/assets/images/ddd-prices-update.png)
+
+#### Removing an item:
+
 
 ## Technologies Used
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
