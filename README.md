@@ -91,6 +91,21 @@ Once the user is happy with their new data and has confirmed this with the appli
 ![Updated menu with new addition](/assets/images/ddd-prices-update.png)
 
 #### Removing an item:
+![First removing item screen](/assets/images/ddd-remove-item1.png)  
+
+If the user instead wants to remove a menu item, after once again selecting which category their target item is in, they will be shown this similar screen. The program once again display the current options and their prices and requests an input from the user. Importantly, the user now has to type the full item name instead of using a quicker integer selection. This is valuable because it ensures the user is certain which item the are attempting to remove from the menu.  
+
+![Second removing item screen](/assets/images/ddd-remove-item2.png)  
+
+After inputting their desired item, the user is once again requested to confirm their decision.  
+
+![Final removing item screen](/assets/images/ddd-remove-item3.png)  
+
+Once the item to be deleted has been confirmed with the user, the application tells the user the item is being deleted and finally confirms the change upon completion. The user has then finished using this service and can return to the main menu or exit the program. Below is the newly updated prices worksheet.  
+
+![Updated menu after deleted item](/assets/images/ddd-orders-update2.png)
+
+#### Editing an item:
 
 
 ## Technologies Used
