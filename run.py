@@ -58,6 +58,9 @@ def get_order_option(data, column):
     """
     # Collects available options from relevant column in prices worksheet.
     available_options = SHEET.worksheet('Prices').col_values(column)
+    # ensures the column contains data to work with.
+    check_if_column_empty(available_options)
+    # runs as expected if column has option data.
     option_num = 1
     total_number_options = []
     display_options = {}
@@ -98,6 +101,22 @@ def get_order_quantity():
     possible_quantity_values = {1, 2, 3, 4, 5, 6, 7, 8}
     quantity = validate_order_option(possible_quantity_values)
     return quantity
+
+
+def check_if_column_empty(options):
+    """
+    Checks that a menu category column contains any options.
+    Does nothing if the column has options.
+    Terminates current process and returns user to menu if column empty.
+
+    Args:
+        options: list of str: received list from spreadsheet.
+    """
+    if len(options) < 2:
+        print('It seems like there are no options to currently choose from!\n')
+        print('You will now be returned to the main menu, please add some')
+        print('options to this part of the menu before trying again!\n')
+        main()
 
 
 def validate_order_option(data):
@@ -306,6 +325,9 @@ def display_columns(columns_data):
                       contains data regarding relevant worksheet columns.
     """
     column_1 = columns_data[0]
+    # ensures the column contains data to work with.
+    check_if_column_empty(column_1)
+    # runs as expected if column has option data.
     column_2 = columns_data[1]
     print(f'The current {columns_data[2]} options are:')
     for i in range(len(column_1)):
