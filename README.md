@@ -103,7 +103,7 @@ After inputting their desired item, the user is once again requested to confirm 
 
 Once the item to be deleted has been confirmed with the user, the application tells the user the item is being deleted and finally confirms the change upon completion. The user has then finished using this service and can return to the main menu or exit the program. Below is the newly updated prices worksheet.  
 
-![Updated menu after deleted item](/assets/images/ddd-orders-update2.png)
+![Updated menu after deleted item](/assets/images/ddd-orders-update2.png)  
 
 #### Editing an item:
 
