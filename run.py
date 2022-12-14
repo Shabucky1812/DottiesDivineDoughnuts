@@ -59,25 +59,29 @@ def get_order_option(data, column):
     # Collects available options from relevant column in prices worksheet.
     available_options = SHEET.worksheet('Prices').col_values(column)
     option_num = 1
-    total_number_options = ()
-    display_options = []
+    total_number_options = []
+    display_options = {}
     # Creates a dictionary which assigns every option to a number as a value.
     # This makes selection easier for the user and allows the function to work
     # correctly even when the menu is adjusted.
     for option in available_options:
         if option == data:  # skips past column header.
             continue
-        new_option = {option_num: option}
-        display_options.append(new_option)
-        total_number_options = total_number_options + tuple(str(option_num))
-        int(option_num)
+        # creates new key:value pair, example: {1:'Small'}
+        display_options[option_num] = option
+        # adds current option key to list of selectable options for the user.
+        total_number_options.append(option_num)
         option_num += 1
     print(f'The current {data} options are:')
-    for option in range(len(display_options)):
-        print(f'({option + 1}) - {display_options[option][option + 1]}')
+    for i, option in enumerate(display_options):
+        print(f'({i + 1}) - {display_options[option]}')
     print('')
     customer_option = validate_order_option(total_number_options)
-    final_selection = display_options[customer_option - 1][customer_option]
+    # customer_option will be an integer that corresponds to a key in the
+    # dictionary, this key is then used to return it's paired value.
+    # For example, if the user inputs 2, print(display_options[2]) would print
+    # whatever value was paired to the key 2.
+    final_selection = display_options[customer_option]
     return final_selection
 
 
@@ -91,7 +95,7 @@ def get_order_quantity():
     """
     print('Finally, how many of these doughnuts would the customer like?')
     print('Please enter a number between (1) and the maximum quantity (8): \n')
-    possible_quantity_values = {'1', '2', '3', '4', '5', '6', '7', '8'}
+    possible_quantity_values = {1, 2, 3, 4, 5, 6, 7, 8}
     quantity = validate_order_option(possible_quantity_values)
     return quantity
 
@@ -103,7 +107,7 @@ def validate_order_option(data):
     - that it is a valid option
 
     Args:
-        data: string: User inputted data.
+        data: list/set of int: available selection numbers.
 
     Returns:
         selection: int: number that represents user's selection.
@@ -115,10 +119,10 @@ def validate_order_option(data):
         except ValueError as e:
             print(f'{e}, Please ensure you enter your data as a number.\n')
             continue
-        int(selection)
-        if selection in data:
+        if int(selection) in data:
             break
         print('Please enter a number that corresponds to the options above.\n')
+        print(data)
     return int(selection)
 
 
