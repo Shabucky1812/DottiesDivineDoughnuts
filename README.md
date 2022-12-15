@@ -139,7 +139,14 @@ The next analytics shown is the number of doughnuts made and sold in the last 5 
 
 ![Final analytics screen](/assets/images/ddd-view-analytics3.png)  
 
-Lastly, the user is shown the total income of this business since it's creation. This is a less helpful statistic but it still provides value to Dottie by reminding her how far she has come! The program once again then displays the service finished screen.
+Lastly, the user is shown the total income of this business since it's creation. This is a less helpful statistic but it still provides value to Dottie by reminding her how far she has come! The program once again then displays the service finished screen.  
+
+### Future Implementations:  
+For the scope of this project, I am very happy with how the criteria listed in the user stories has been met. However, this application can be further developed in a number of ways:  
+
+1. Firstly, a login system could be introduced. Currently, the user has access to every service immediately without any verification of who the user is. Since this application directly interacts with Dottie's menu and order history, it would be ideal if only Dottie and any future employee of the business had access to it. You may have noticed that the flowchart created for this project during planning actually contains a login system, this is because this feature was in my original scope for the project. However, I ultimately decided to leave it for a future version as the existing project content became a lot larger than I anticipated and it functions fine for now without one. The login system would take a username and a password and allow access to the application if the credentials were valid and deny entry otherwise. An additional service that allows a logged-in user to edit/add/remove valid accounts could also be paired with this feature.  
+
+2. Another expansion I would like to see in this project's future would be an updated 'view analytics' service. The current service functions perfectly for the small scope of this business but as it grows, the small list of analytics shown now might become somewhat obselete. The limits of this expansion are far beyond my comprehension at the moment as data analysis is a large environment, saturated with possibility. One idea I would like to implement in this area would be a statistic that reveals the correlation between the menu options, something like: 'Most customers who purchase doughnuts with jam filling also request sugar topping'. This would be useful as it would reveal additional purchasing trends and could be used as a suggestion for creating special offers to entice more customers. 
 
 ## Technologies Used
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
