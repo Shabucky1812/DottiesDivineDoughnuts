@@ -106,6 +106,29 @@ Once the item to be deleted has been confirmed with the user, the application te
 ![Updated menu after deleted item](/assets/images/ddd-orders-update2.png)  
 
 #### Editing an item:
+![First item edit screen](/assets/images/ddd-edit-item1.png)  
+
+The final service available to edit the menu is to edit an item's price. After selecting this option and again entering which category the target item is in, this screen will be presented to the user. It function exactly like the screen shown when selecting an item to remove.  
+
+![Second item edit screen](/assets/images/ddd-edit-item2.png)  
+
+The user's selection is confirmed.
+
+![Third item edit screen](/assets/images/ddd-edit-item3.png)  
+
+Next, the user is reminded of the item's current price and prompted to input the new price. This input is taken in pence like the price input used in the adding an item process.  
+
+![Fourth item edit screen](/assets/images/ddd-edit-item4.png)  
+
+A final confirmation displaying the item and new price is provided before the changes are made.  
+
+![Final item edit screen](/assets/images/ddd-edit-item5.png)  
+
+Finally, the changes are confirmed in the same style as the previous changes and the user is presented the service finished options once more. The freshly altered menu can be seen below.  
+
+![Updated prices worksheet with freshly changed item price](/assets/images/ddd-prices-update2.png)  
+
+### Viewing Analytics:
 
 
 ## Technologies Used
