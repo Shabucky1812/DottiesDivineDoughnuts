@@ -129,7 +129,17 @@ Finally, the changes are confirmed in the same style as the previous changes and
 ![Updated prices worksheet with freshly changed item price](/assets/images/ddd-prices-update2.png)  
 
 ### Viewing Analytics:
+![First analytics screen](/assets/images/ddd-view-analytics1.png)  
 
+The last available main menu option is the 'view analytics' service. Upon selecting this service, the program repeats to the user which service has been selected and than presents a small series of helpful analytics regarding recent sales. The first wave of analytics contains text that displays the most popular menu option for each category (size, filling, topping). This is valuable to the user as it can help Dottie know what stock to prepare more of and what stock might need a price change. For ease of use, the program waits for the user to press enter before displaying the next statement, this is helpful as it allows them to digest the information at their own pace.  
+
+![Second analytics screen](/assets/images/ddd-view-analytics2.png)  
+
+The next analytics shown is the number of doughnuts made and sold in the last 5 orders. This is valuable to the user because it gives Dottie a better idea of how much stock she has used and how many doughnuts she will have to prepare in the future.  
+
+![Final analytics screen](/assets/images/ddd-view-analytics3.png)  
+
+Lastly, the user is shown the total income of this business since it's creation. This is a less helpful statistic but it still provides value to Dottie by reminding her how far she has come! The program once again then displays the service finished screen.
 
 ## Technologies Used
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
