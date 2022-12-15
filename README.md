@@ -149,7 +149,20 @@ For the scope of this project, I am very happy with how the criteria listed in t
 2. Another expansion I would like to see in this project's future would be an updated 'view analytics' service. The current service functions perfectly for the small scope of this business but as it grows, the small list of analytics shown now might become somewhat obselete. The limits of this expansion are far beyond my comprehension at the moment as data analysis is a large environment, saturated with possibility. One idea I would like to implement in this area would be a statistic that reveals the correlation between the menu options, something like: 'Most customers who purchase doughnuts with jam filling also request sugar topping'. This would be useful as it would reveal additional purchasing trends and could be used as a suggestion for creating special offers to entice more customers. 
 
 ## Technologies Used
+
+- This application was created with the Python programming language.  
+- This application was developed within [Gitpod](https://www.gitpod.io/).  
+- The repository for this application was created using [GitHub](https://github.com/) and [Git](https://git-scm.com/) was used for version control.  
 - The flowchart created during the planning of this application was created using [Lucidchart](https://www.lucidchart.com).
+- The external spreadsheet accessed throughout this application was created using [Google Sheets](https://www.google.com/sheets/about/).
+- The credentials used in this project to securely access the external sheet was generated using [Google Drive API](https://developers.google.com/drive/api/guides/about-sdk).
+- This application interacts with the external sheet using [Google Sheets API](https://developers.google.com/sheets/api)
+- The follwing python libraries were used:
+    - [gspread](https://docs.gspread.org/en/latest/): to read from/write to the external sheet.
+    - [Google Auth](https://google-auth.readthedocs.io/en/master/): required to use credentials.
+    - [statistics](https://docs.python.org/3/library/statistics.html): used to find modes of menu items.
+    - [sys](https://docs.python.org/3/library/sys.html): used to exit the application when required.
+- This application was deployed using [Heroku](https://id.heroku.com/login).
 
 ## Deployment
 
