@@ -170,7 +170,7 @@ To clone this repository paste `git clone https://github.com/Shabucky1812/Dottie
 Firstly, you must create a google sheet for your cloned application to interact with:  
 - From this link: [Google Sheets](https://docs.google.com/spreadsheets/u/0/), create/sign-in to a personal (not-shared/business) google account.
 - Press **Blank** to create a new spreadsheet.
-- At the top left of the screen, replace the _'Untitled Spreadsheet'_ placeholder text with the title: _'dotties_divine_doughnuts'_.
+- At the top-left of the screen, replace the _'Untitled Spreadsheet'_ placeholder text with the title: _'dotties_divine_doughnuts'_.
 - At the bottom of the screen, rename the current worksheet _'Sheet1'_ to _'Prices'_.
 - Create a new worksheet using the plus symbol to the left of the existing worksheet and rename the new sheet to _'Orders'_.
 - Return to the _'Prices'_ worksheet and add the following values to the first row, from left to right: 
@@ -196,6 +196,35 @@ Firstly, you must create a google sheet for your cloned application to interact 
 
 - Your _'Orders'_ worksheet should now look like this:  
 ![Example orders worksheet](/assets/images/ddd-example-orders-worksheet.png)  
+
+Next, you need to set up a couple API's to allow interaction between your code and your new spreadsheet:
+- Use this link to access the [Google Cloud Platform](https://console.cloud.google.com).
+- From the project menu at the top of the screen, select **NEW PROJECT**.
+- Enter a unique project name and the press **CREATE**.
+- Select **Dashboard**.
+- Open the navigation menu at the top-left of the screen then select **APIs and services** and then **Library**.
+- Type _'Google Drive API'_ into the search bar, press enter, and then select **Google Drive API**.
+- Click **ENABLE** and wait to be taken to a new screen.
+- Select **CREATE CREDENTIALS** from the top-right of the screen.
+- From the **Select an API** dropdown menu, select _'Google Drive API'_.
+- Select the **Application data** radio button and then the **No, I'm not using them** radio button.
+- Click **Next**.
+- In the **Service account name** input, enter a service account name. This can be any value, I suggest _'dotties-divine-doughnuts'_.
+- Select **CREATE AND CONTINUE**.
+- From the **Select a role** dropdown, select **Basic** and then **Editor**.
+- Select **CONTINUE** and then **DONE**
+- Select the **CREDENTIALS** tab from the options in the middle of the screen.
+- Under the __Service Accounts__ sub-heading, click on your newly created service account.
+- Select the **KEYS** tab and from the **ADD KEY** dropdown, click **Create new key**.
+- Select **JSON** and then click **CREATE**. A file containing API credentials will now be automatically downloaded to your device.
+- Locate this file and copy it directly into your local clone of this application.
+- Rename the file in the clone to: _'creds.json'_. This file contains sensitive data so make sure it is listed in the .gitignore file to prevent pushing it.
+- From within the _'creds.json'_, copy the value for _'client_email'_.
+- Return to your google sheet for this application and click **Share** at the top-right of the screen.
+- Paste the copied value into the input provided, ensure _'Editor'_ is selected from the dropdown menu to the right, untick _'Notify people'_, and finally, click **Share**.
+- Return to your project dashboard on the Google Cloud Platform and once again select **APIs and services** and then **Library** from the top-left navigation menu.
+- Type _'Google Sheets API'_ into the search bar, press enter, and then select **Google Sheets API**.
+- Finally, click **ENABLE**.
 
 ## Testing  
 Please find the testing write-up for this project in [this Testing Document](testing.md).
