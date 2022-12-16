@@ -686,8 +686,9 @@ def get_doughnuts_made():
         total: int: number of doughnuts made in last 5 orders.
     """
     orders = SHEET.worksheet('Orders')
-    # get quantity values from relevant column.
+    # get quantity values from relevant column and delete header.
     quantity_column = orders.col_values(4)
+    del quantity_column[0]
     # separate the last 5
     last_5 = quantity_column[-5:]
     # convert string nums into ints.
