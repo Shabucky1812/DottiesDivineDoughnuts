@@ -165,6 +165,37 @@ For the scope of this project, I am very happy with how the criteria listed in t
 - This application was deployed using [Heroku](https://id.heroku.com/login).
 
 ## Deployment
+To clone this repository paste `git clone https://github.com/Shabucky1812/DottiesDivineDoughnuts.git` into the terminal of the editor you are using. Then follow the steps below to get everything up and running.  
+
+Firstly, you must create a google sheet for your cloned application to interact with:  
+- From this link: [Google Sheets](https://docs.google.com/spreadsheets/u/0/), create/sign-in to a personal (not-shared/business) google account.
+- Press **Blank** to create a new spreadsheet.
+- At the top left of the screen, replace the _'Untitled Spreadsheet'_ placeholder text with the title: _'dotties_divine_doughnuts'_.
+- At the bottom of the screen, rename the current worksheet _'Sheet1'_ to _'Prices'_.
+- Create a new worksheet using the plus symbol to the left of the existing worksheet and rename the new sheet to _'Orders'_.
+- Return to the _'Prices'_ worksheet and add the following values to the first row, from left to right: 
+    - 'size'
+    - 'Price(£)'
+    - 'filling'
+    - 'Price(£)'
+    - 'topping'
+    - 'Price(£)'  
+
+- Your _'Prices'_ worksheet should now look like this:  
+![Example Prices worksheet](/assets/images/ddd-example-prices-worksheet1.png)  
+
+- I would recommend adding some sample menu data manually. Your menu options can be unique but the format must look like the example image below and importantly, all of the values you add must contain only alphabetical characters and no spaces!  
+![Populated example prices worksheet](/assets/images/ddd-example-prices-worksheet2.png)  
+
+- Next, select the _'Orders'_ worksheet and add the following values to the first row, from left to right:
+    - 'Size'
+    - 'Filling'
+    - 'Topping'
+    - 'Quantity'
+    - 'Total Price(£)'  
+
+- Your _'Orders'_ worksheet should now look like this:  
+![Example orders worksheet](/assets/images/ddd-example-orders-worksheet.png)  
 
 ## Testing  
 Please find the testing write-up for this project in [this Testing Document](testing.md).
