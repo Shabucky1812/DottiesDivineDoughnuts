@@ -197,7 +197,7 @@ Firstly, you must create a google sheet for your cloned application to interact 
 - Your _'Orders'_ worksheet should now look like this:  
 ![Example orders worksheet](/assets/images/ddd-example-orders-worksheet.png)  
 
-Next, you need to set up a couple API's to allow interaction between your code and your new spreadsheet:
+Next, you need to set up a couple API's to allow interaction between your code and your new spreadsheet:  
 - Use this link to access the [Google Cloud Platform](https://console.cloud.google.com).
 - From the project menu at the top of the screen, select **NEW PROJECT**.
 - Enter a unique project name and the press **CREATE**.
@@ -225,6 +225,30 @@ Next, you need to set up a couple API's to allow interaction between your code a
 - Return to your project dashboard on the Google Cloud Platform and once again select **APIs and services** and then **Library** from the top-left navigation menu.
 - Type _'Google Sheets API'_ into the search bar, press enter, and then select **Google Sheets API**.
 - Finally, click **ENABLE**.
+
+Lastly, deploy the application using [Heroku](https://id.heroku.com/login):
+- Before the application can be deployed, you must make some changes to your local clone.
+- Paste `pip3 install gspread google-auth` into the terminal to install the gspread and google-auth libraries into your development environment.
+- Paste `pip3 freeze > requirements.txt` into the terminal so Heroku knows what dependencies the application uses.
+- Commit and push these changes before deployment.
+- Use this link to log-in/sign-up to [Heroku](https://id.heroku.com/login).
+- From the Heroku dashboard, select the **New** dropdown from the top-right, and then click **Create new app**.
+- Enter a name into the **App name** input, select your region from the **Region** dropdown, and then click **Create app**.
+- From the tabs near the top of the screen, select **Settings** and scroll down to the **Config Vars** sub-heading.
+- Enter _'CREDS'_ into the _'KEY'_ input and paste all the contents of your previously created _'creds.json'_ file into the _'VALUE'_ input.
+- Click **Add**.
+- Create another config var with the key: _'PORT'_, and the value: _'8000'_, then click **Add**.
+- Scroll down to the **Buildpacks** sub-heading.
+- Select **Add buildpack**, then select **python**, and finally select **Save changes**.
+- Again select **Add buildpack**, then **nodejs**, and **Save changes** once more.
+- Ensure the python buildpack comes first in the buildpack list. You can re-order the buildpacks if necessary.
+- Now, scroll back up and select the **Deploy** tab.
+- Under the **Deployment method** sub-heading, select **GitHub**.
+- Search for the GitHub repo for your application and then click **Connect**.
+- You can now deploy your application in two ways:
+- Select **Enable Automatic Deploys** to automatically deploy your program. This means that whenever a change is pushed, Heroku will automatically update your live app.
+- This project was manually deployed by selecting **Deploy Branch** under the **Manual Deploy** sub-heading. A manually deployed site will only update with new pushes when re-deployed next.
+- Once Heroku has deployed your application, it will present you with a link to the live site.
 
 ## Testing  
 Please find the testing write-up for this project in [this Testing Document](testing.md).
