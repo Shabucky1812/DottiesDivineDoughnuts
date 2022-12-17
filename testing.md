@@ -15,7 +15,9 @@ All of the python wrote for this application passes through [this PEP8 Linter](h
 | Edit item price service should function correctly. | Attempt to use the 'Edit the price of an existing item' service. | Program should request item category, name, and new price, then confirm change before making relevant amendment on the 'Prices' worksheet. | PASS |
 | View analytics service should function correctly. | Attempt to use the 'View analytics' service. | Program should display a series of analytics about recent order history. | PASS |
 | Program should correctly handle what happens when a service is finished. | Finish using a service and see what happens. | Application should communicate that the service is finished to the user before presenting options to return to the main menu or exit the application. | PASS |
-| Special 'exit' and 'main' inputs should function througout the application. | Test the special inputs at various input stages in the program. | Program should always return the user to the main menu if 'main' is entered, and exit the application if 'exit' is entered. | FAIL - Inputs used to display waves of analytics in the 'view analytics' process didn't react to these values. This bug is now solved. |
+| Special 'exit' and 'main' inputs should function througout the application. | Test the special inputs at various input stages in the program. | Program should always return the user to the main menu if 'main' is entered, and exit the application if 'exit' is entered. | FAIL - Inputs used to display waves of analytics in the 'view analytics' process didn't react to these values. This bug is now patched. |
+| Analytics calculated should be correct. | Compare automatic analytics with my own manually calculated results. | My results should match the program's results. | PASS |
+| User should only be able to add valid items to menu. | Try add invalid items to menu. | The program should prevent the user from adding any items that contain non-alphabetical characters (including spaces), and also prevent any duplicate data being submitted. | PASS | 
 
 ### Browser Compatibility:
 
