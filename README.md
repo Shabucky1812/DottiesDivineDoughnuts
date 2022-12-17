@@ -256,5 +256,11 @@ Please find the testing write-up for this project in [this Testing Document](tes
 ## Credits
 ### Contents  
 - All of the code for this website was written by me, [Shaun Buck](https://github.com/Shabucky1812).
+- Inspiration for manipulating single cell values using gspread was taken from [here](https://docs.gspread.org/en/latest/user-guide.html#getting-a-cell-value).
+- Additional information about dictionary usage was taken from [here](https://www.geeksforgeeks.org/python-dictionary-comprehension/).
 
 ### Acknowledgements  
+I'll keep this one short:
+- Huge thanks to Brain Macharia as always, thanks for all your support!
+- Thanks to my gorgeous cat Phoenix, who is sat on my lap right now.
+- Thank you for reading!
