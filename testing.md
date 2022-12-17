@@ -20,10 +20,18 @@ All of the python wrote for this application passes through [this PEP8 Linter](h
 | User should only be able to add valid items to menu. | Try add invalid items to menu. | The program should prevent the user from adding any items that contain non-alphabetical characters (including spaces), and also prevent any duplicate data being submitted. | PASS | 
 
 ### Browser Compatibility:
+This application fully functions on the following browsers:  
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
 
 ## Bugs
-### Solved Bugs:
+### Solved Bugs:  
+- When initially created, the function to delete an item left a gap in the worksheet where the item had been. This caused multiple other program services to fail upon use. I solved this bug by moving the final value in the columns affected to the newly created gap after deleting an item. This means that an item can be deleted without leaving a gap which causes no errors in other places.  
 
-### Known Bugs:
+- During the testing for this document, I discovered a bug which prevented the user from returning to the main menu or exiting the application whilst viewing analytics. This was because the placeholder inputs I used to release the analytics in readable waves did not pass through the centralized input function that checks for the 'exit' and 'main' commands. To fix this bug, I simply passed these inputs through the centralized function without storing the return value.
+
+### Known Bugs:  
+I have tested this application thoroughly and, as far as I am aware, there are no current bugs.
 
 Return to [README](README.md)
