@@ -261,6 +261,6 @@ Please find the testing write-up for this project in [this Testing Document](tes
 
 ### Acknowledgements  
 I'll keep this one short:
-- Huge thanks to Brain Macharia as always, thanks for all your support!
+- Huge thanks to Brian Macharia as always, thanks for all your support!
 - Thanks to my gorgeous cat Phoenix, who is sat on my lap right now.
 - Thank you for reading!
