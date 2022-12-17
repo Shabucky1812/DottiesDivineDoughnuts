@@ -638,7 +638,7 @@ def view_analytics():
     print('In the last 5 orders, you have made a total of:')
     doughnut_quantity = get_doughnuts_made()
     print(f'{doughnut_quantity} Doughnuts!\n')
-    input('Press ENTER to continue\n')
+    get_user_input('Press ENTER to continue')
     print('Since starting this business, you have made a total income of:')
     income = get_income()
     print(f'£{income:.2f}\n')
@@ -674,7 +674,7 @@ def print_mode(category, modes):
     else:
         for mode in modes:
             print(mode)
-    input('\nPress ENTER to continue\n')
+    get_user_input('Press ENTER to continue')
 
 
 def get_doughnuts_made():
